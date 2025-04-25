@@ -79,11 +79,6 @@ int main() {
 	//	std::cout << arr[n] << " " << words[n] << "\n" << std::endl;
 	//}
 	//
-	int a;
-	std::cout << "入力してください" << std::endl;
-	std::cin >> a;
-	std::string suchi = std::to_string(a);
-
 	
 
 
