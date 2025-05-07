@@ -5,44 +5,44 @@
 #include <algorithm>
 #include <cctype>
 
-static bool isInteger(const std::string& s) {
-	size_t i = 0;
-	if (s[0] == '-' || s[0] == '+') i = 1;
-	if (i == s.size()) return false;
-
-	for (; i < s.size(); ++i) {
-		if (!std::isdigit(s[i])) return false;
-	}
-	return true;
-}
-static bool isDecimal(const std::string& s) {
-	size_t i = 0;
-	bool pointSeen = false;
-
-	if (s[0] == '-' || s[0] == '+') i = 1;
-	if (i == s.size()) return false;
-
-	for (; i < s.size(); ++i) {
-		if (s[i] == '.') {
-			if (pointSeen) return false;
-			pointSeen = true;
-		}
-		else if (!std::isdigit(s[i])) {
-			return false;
-		}
-	}
-	return pointSeen;
-}
+//static bool isInteger(const std::string& s) {
+//	size_t i = 0;
+//	if (s[0] == '-' || s[0] == '+') i = 1;
+//	if (i == s.size()) return false;
+//
+//	for (; i < s.size(); ++i) {
+//		if (!std::isdigit(s[i])) return false;
+//	}
+//	return true;
+//}
+//static bool isDecimal(const std::string& s) {
+//	size_t i = 0;
+//	bool pointSeen = false;
+//
+//	if (s[0] == '-' || s[0] == '+') i = 1;
+//	if (i == s.size()) return false;
+//
+//	for (; i < s.size(); ++i) {
+//		if (s[i] == '.') {
+//			if (pointSeen) return false;
+//			pointSeen = true;
+//		}
+//		else if (!std::isdigit(s[i])) {
+//			return false;
+//		}
+//	}
+//	return pointSeen;
+//}
 
 
 int main() {
 
-	std::string firNUM;
-	std::string secNum;
+	//std::string firNUM;
+	//std::string secNum;
 
-	int num1, num2;
+	//int num1, num2;
 
-	while (true) {
+	/*while (true) {
 
 		std::cout << "一つ目の整数を入力してください" << std::endl;
 		std::cin >> firNUM;
@@ -73,9 +73,31 @@ int main() {
 		}
 
 		continue;
+	}*/
+	
+	/*std::string val = "+33";
+	int num = std::stoi(val);
+	num = num / 5;
+	std::cout << num << std::endl;*/
+
+	int takasa;
+
+	std::cin >> takasa;
+	
+	for (int i = 0; i <= takasa; i++) {
+		std::string str;
+		std::string space;
+		for (int j = 0; j < i; j++) {
+			str += "■ ";
+		}
+		for (int k = 0; k < takasa - i; k++) {
+			space += " ";
+		}
+		std::cout << space <<  str << "\n" << std::endl;
+		str.clear();
+		
 	}
-	
-	
+
 
 
 	std::cin.ignore();
