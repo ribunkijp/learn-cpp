@@ -1,9 +1,11 @@
 ﻿
 #include <iostream>
 #include <string>
+#include <stdlib.h>
 #include <vector>
 #include <algorithm>
 #include <cctype>
+#include <time.h>
 
 //static bool isInteger(const std::string& s) {
 //	size_t i = 0;
@@ -80,11 +82,13 @@ int main() {
 	num = num / 5;
 	std::cout << num << std::endl;*/
 
-	int takasa;
+	//int takasa;
 
-	std::cin >> takasa;
+	/*std::cout << "段数＞" << std::endl;
+
+	std::cin >> takasa;*/
 	
-	for (int i = 0; i <= takasa; i++) {
+	/*for (int i = 0; i <= takasa; i++) {
 		std::string str;
 		std::string space;
 		for (int j = 0; j < i; j++) {
@@ -96,8 +100,23 @@ int main() {
 		std::cout << space <<  str << "\n" << std::endl;
 		str.clear();
 		
+	}*/
+	/*for (int i = takasa; i>=0; i--) {
+		std::string str;
+		for (int j = 0; j < i; j++) {
+			str += "■";
+		}
+		std::cout << str << "\n" << std::endl;
+		str.clear();
+	}*/
+	/*srand(5);
+	for (int i = 0; i < 10; i++) {
+		std::cout << rand() << std::endl;
+	}*/
+	srand((unsigned)time(nullptr));
+	for (int i = 0; i < 10; i++) {
+		std::cout << rand() << std::endl;
 	}
-
 
 
 	std::cin.ignore();
