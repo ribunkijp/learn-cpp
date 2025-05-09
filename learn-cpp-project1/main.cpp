@@ -6,116 +6,64 @@
 #include <algorithm>
 #include <cctype>
 #include <time.h>
+#include <cstdlib> 
 
-//static bool isInteger(const std::string& s) {
-//	size_t i = 0;
-//	if (s[0] == '-' || s[0] == '+') i = 1;
-//	if (i == s.size()) return false;
-//
-//	for (; i < s.size(); ++i) {
-//		if (!std::isdigit(s[i])) return false;
-//	}
-//	return true;
-//}
-//static bool isDecimal(const std::string& s) {
-//	size_t i = 0;
-//	bool pointSeen = false;
-//
-//	if (s[0] == '-' || s[0] == '+') i = 1;
-//	if (i == s.size()) return false;
-//
-//	for (; i < s.size(); ++i) {
-//		if (s[i] == '.') {
-//			if (pointSeen) return false;
-//			pointSeen = true;
-//		}
-//		else if (!std::isdigit(s[i])) {
-//			return false;
-//		}
-//	}
-//	return pointSeen;
-//}
+//整数判断
+static bool isInteger(const std::string& s) {
+	size_t i = 0;
+	if (s[0] == '-' || s[0] == '+') i = 1;
+	if (i == s.size()) return false;
 
+	for (; i < s.size(); ++i) {
+		if (!std::isdigit(s[i])) return false;
+	}
+	return true;
+}
 
 int main() {
 
-	//std::string firNUM;
-	//std::string secNum;
-
-	//int num1, num2;
-
-	/*while (true) {
-
-		std::cout << "一つ目の整数を入力してください" << std::endl;
-		std::cin >> firNUM;
-		std::cout << "二つ目の整数を入力してください" << std::endl;
-		std::cin >> secNum;
-
-		if (isInteger(firNUM) && isInteger(secNum)) {
-			num1 = std::stoi(firNUM);
-			num2 = std::stoi(secNum);
-			if (num2 == 0) {
-				std::cout << "0割り算は計算不可です " << std::endl;
-			}
-			else {
-				std::cout << num1 << "+" << num2 << "=" << (num1 + num2) << "\n" << std::endl;
-				std::cout << num1 << "-" << num2 << "=" << (num1 - num2) << "\n" << std::endl;
-				std::cout << num1 << "*" << num2 << "=" << (num1 * num2) << "\n" << std::endl;
-				std::cout << num1 << "/" << num2 << "=" << (num1 / num2) << "\n" << std::endl;
-				std::cout << num1 << "%" << num2 << "=" << (num1 % num2) << "\n" << std::endl;
-				
-				break;
-			}
+	//title
+	std::cout << "数当てゲームへようこそ!!今回の神秘的な数字は１～1000の間の整数です。\n";
+	//乱数生成	
+	srand((unsigned)time(nullptr));
+	int kotae = rand() % 1000 + 1;//answer
+	
+	//ユーザーの入力
+	std::string str;
+	
+	
+	while(true) {
+		
+		std::cin >> str;
+		
+		int num = std::stoi(str);
+		
+		if (!isInteger(str) || (num <= 0 || num > 1000)) {
+			std::cout << "1～1000の整数を入力してください" << std::endl;
 		}
-		else if ((isDecimal(firNUM) && isDecimal(secNum)) || (isDecimal(firNUM) && isInteger(secNum)) || (isDecimal(secNum) && isInteger(firNUM))) {
-			std::cout << "整数だけを入力してください。小数は入力しないでください" << std::endl;
+		//ユーザーの入力と答えの差
+		int dist = num - kotae;
+		
+		//判断
+		if (dist == 0) {
+			std::cout << "当たったね、あなたは神様かもね";//当たった
+			break;
 		}
-		else {
-			std::cout << "これは数値ではありません。数値だけを入力してください" << std::endl;
+		else if (dist > 100) {
+			std::cout << "数字が大きすぎました" << std::endl;
+		}
+		else if (dist < -100) {
+			std::cout << "数字が小さすぎました" << std::endl;
+		}
+		else if (dist < 100 && dist > 0) {
+			std::cout << "数字がちょっと大きかった" << std::endl;
+		}
+		else if (dist > -100 && dist < 0) {
+			std::cout << "数字がちょっと小さかった" << std::endl;
 		}
 
 		continue;
-	}*/
-	
-	/*std::string val = "+33";
-	int num = std::stoi(val);
-	num = num / 5;
-	std::cout << num << std::endl;*/
-
-	//int takasa;
-
-	/*std::cout << "段数＞" << std::endl;
-
-	std::cin >> takasa;*/
-	
-	/*for (int i = 0; i <= takasa; i++) {
-		std::string str;
-		std::string space;
-		for (int j = 0; j < i; j++) {
-			str += "■ ";
-		}
-		for (int k = 0; k < takasa - i; k++) {
-			space += " ";
-		}
-		std::cout << space <<  str << "\n" << std::endl;
-		str.clear();
 		
-	}*/
-	/*for (int i = takasa; i>=0; i--) {
-		std::string str;
-		for (int j = 0; j < i; j++) {
-			str += "■";
-		}
-		std::cout << str << "\n" << std::endl;
-		str.clear();
-	}*/
-	/*srand(5);
-	for (int i = 0; i < 10; i++) {
-		std::cout << rand() << std::endl;
-	}*/
-	srand((unsigned)time(nullptr));
-	for (int i = 0; i < 10; i++) {
-		std::cout << rand() << std::endl;
 	}
 
 
