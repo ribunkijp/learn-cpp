@@ -10,12 +10,14 @@
 
 //整数判断
 static bool isInteger(const std::string& s) {
+	if (s.empty()) return false;
+
 	size_t i = 0;
 	if (s[0] == '-' || s[0] == '+') i = 1;
 	if (i == s.size()) return false;
 
 	for (; i < s.size(); ++i) {
-		if (!std::isdigit(s[i])) return false;
+		if (!std::isdigit(static_cast<unsigned char>(s[i]))) return false;
 	}
 	return true;
 }
@@ -36,30 +38,35 @@ int main() {
 		
 		std::cin >> str;
 		
-		int num = std::stoi(str);
-		
-		if (!isInteger(str) || (num <= 0 || num > 1000)) {
+		if (!isInteger(str)) {
 			std::cout << "1～1000の整数を入力してください" << std::endl;
 		}
-		//ユーザーの入力と答えの差
-		int dist = num - kotae;
+		else {
+			int num = std::stoi(str);
+			if (num <= 0 || num > 1000) {
+				std::cout << "1～1000の整数を入力してください" << std::endl;
+				continue;
+			}
+			//ユーザーの入力と答えの差
+			int dist = num - kotae;
 		
-		//判断
-		if (dist == 0) {
-			std::cout << "当たったね、あなたは神様かもね";//当たった
-			break;
-		}
-		else if (dist > 100) {
-			std::cout << "数字が大きすぎました" << std::endl;
-		}
-		else if (dist < -100) {
-			std::cout << "数字が小さすぎました" << std::endl;
-		}
-		else if (dist < 100 && dist > 0) {
-			std::cout << "数字がちょっと大きかった" << std::endl;
-		}
-		else if (dist > -100 && dist < 0) {
-			std::cout << "数字がちょっと小さかった" << std::endl;
+			//判断
+			if (dist == 0) {
+				std::cout << "当たったね、あなたは神様かもね";//当たった
+				break;
+			}
+			else if (dist > 100) {
+				std::cout << "数字が大きすぎました" << std::endl;
+			}
+			else if (dist < -100) {
+				std::cout << "数字が小さすぎました" << std::endl;
+			}
+			else if (dist < 100 && dist > 0) {
+				std::cout << "数字がちょっと大きかった" << std::endl;
+			}
+			else if (dist > -100 && dist < 0) {
+				std::cout << "数字がちょっと小さかった" << std::endl;
+			}
 		}
 
 		continue;
