@@ -16,13 +16,15 @@ int n = std::stoi(s);  // 文字列を整数に変換
 ### isInteger
 
 ```c++
- bool isInteger(const std::string& s) {
+ static bool isInteger(const std::string& s) {
+	if (s.empty()) return false;
+
 	size_t i = 0;
 	if (s[0] == '-' || s[0] == '+') i = 1;
 	if (i == s.size()) return false;
 
 	for (; i < s.size(); ++i) {
-		if (!std::isdigit(s[i])) return false;
+		if (!std::isdigit(static_cast<unsigned char>(s[i]))) return false;
 	}
 	return true;
 }
