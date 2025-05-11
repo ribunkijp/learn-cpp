@@ -53,3 +53,11 @@ bool isDecimal(const std::string& s) {
 }
 ```
 
+### \n vs std::endl
+
+```c++
+std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より slow
+\n お勧め
+ std::cout << name << '\n';シングルクォート
+```
+
