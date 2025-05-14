@@ -98,8 +98,8 @@ string get_year_month_weekday(int year, int month) {
 		}
 
 	}
-	for (int i = 1; i <= month; i++) {
-		days += get_month_days(year, month);
+	for (int i = 1; i < month; i++) {
+		days += get_month_days(year, i);
 	}
 	
 	
