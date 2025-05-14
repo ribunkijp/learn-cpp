@@ -7,82 +7,102 @@
 #include <cctype>
 #include <time.h>
 #include <cstdlib> 
+#include <array>
 
-//整数判断
-static bool isInteger(const std::string& s) {
-	if (s.empty()) return false;
+using namespace std;
 
-	size_t i = 0;
-	if (s[0] == '-' || s[0] == '+') i = 1;
-	if (i == s.size()) return false;
+bool isUruu(int year);
+static string get_new_year_weekday(int year);
 
-	for (; i < s.size(); ++i) {
-		if (!std::isdigit(static_cast<unsigned char>(s[i]))) return false;
-	}
-	return true;
-}
+int get_month_days(int year, int month);
 
-int Add(int a, int b) {
-	
-	return a + b;
-}
+string get_year_month_weekday(int year, int month);
 
 int main() {
+	/*int input;
 
-	////title
-	//std::cout << "数当てゲームへようこそ!!今回の神秘的な数字は１～1000の間の整数です。\n";
-	////乱数生成	
-	//srand((unsigned)time(nullptr));
-	//int kotae = rand() % 1000 + 1;//answer
-	//
-	////ユーザーの入力
-	//std::string str;
-	//
-	//
-	//while(true) {
-	//	
-	//	std::cin >> str;
-	//	
-	//	if (!isInteger(str)) {
-	//		std::cout << "1～1000の整数を入力してください" << std::endl;
-	//	}
-	//	else {
-	//		int num = std::stoi(str);
-	//		if (num <= 0 || num > 1000) {
-	//			std::cout << "1～1000の整数を入力してください" << std::endl;
-	//			continue;
-	//		}
-	//		//ユーザーの入力と答えの差
-	//		int dist = num - kotae;
-	//	
-	//		//判断
-	//		if (dist == 0) {
-	//			std::cout << "当たったね、あなたは神様かもね";//当たった
-	//			break;
-	//		}
-	//		else if (dist > 100) {
-	//			std::cout << "数字が大きすぎました" << std::endl;
-	//		}
-	//		else if (dist < -100) {
-	//			std::cout << "数字が小さすぎました" << std::endl;
-	//		}
-	//		else if (dist < 100 && dist > 0) {
-	//			std::cout << "数字がちょっと大きかった" << std::endl;
-	//		}
-	//		else if (dist > -100 && dist < 0) {
-	//			std::cout << "数字がちょっと小さかった" << std::endl;
-	//		}
-	//	}
+	string result;
+	
+	cout << "年を入力\n";
 
-	//	continue;
-	//	
-	//}
+	cin >> input;
+	
+	result = get_new_year_weekday(input);
 
-	int c = Add(3, 5);
-	std::cout << c << '\n';
+	cout << result << '\n';*/
+
+	int input_year, input_month;
+
+	string result;
+
+	cout << "年を入力\n";
+
+	cin >> input_year;
+	
+	cout << "月を入力\n";
+
+	cin >> input_month;
+
+	result = get_year_month_weekday(input_year, input_month);
+
+	cout << result << '\n';
+
+	
 
 	std::cin.ignore();
 	std::cin.get();
 
 	return 0;
+}
+
+bool isUruu(int year) {
+
+	return (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0));
+
+}
+
+static string get_new_year_weekday(int year) {
+	const array<string, 7> weekdays  = { "日曜日","月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日" };
+	int days = 0;
+	for (int i = 1900; i < year; i++) {
+		if (isUruu(i)) {
+			days += 366;
+		}
+		else {
+			days += 365;
+		}
+		
+	}
+	return weekdays[(days+1) % 7];
+
+}
+int get_month_days(int year, int month) {
+	if (month == 2) {
+		return isUruu(year) ? 29 : 28;
+	}
+	else if (month == 4 || month == 6 || month == 9 || month == 11) {
+		return 30;
+	}
+	return 31;
+}
+
+string get_year_month_weekday(int year, int month) {
+	const array<string, 7> weekdays = { "日曜日","月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日" };
+	int days = 0;
+	for (int i = 1900; i < year; i++) {
+		if (isUruu(i)) {
+			days += 366;
+		}
+		else {
+			days += 365;
+		}
+
+	}
+	for (int i = 1; i <= month; i++) {
+		days += get_month_days(year, month);
+	}
+	
+	
+
+	return weekdays[(days + 1) % 7];
 }
