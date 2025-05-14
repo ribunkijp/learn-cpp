@@ -16,7 +16,10 @@ int n = std::stoi(s);  // 文字列を整数に変換
 ### isInteger
 
 ```c++
- static bool isInteger(const std::string& s) {
+#include <string>   // std::string
+#include <cctype>   // std::isdigit
+
+static bool isInteger(const std::string& s) {
 	if (s.empty()) return false;
 
 	size_t i = 0;
@@ -33,23 +36,27 @@ int n = std::stoi(s);  // 文字列を整数に変換
 ### isDecimal
 
 ```c++
+#include <string>   // std::string
+#include <cctype>   // std::isdigit
+
 bool isDecimal(const std::string& s) {
-	size_t i = 0;
-	bool pointSeen = false;
+    size_t i = 0;
+    bool pointSeen = false;
 
-	if (s[0] == '-' || s[0] == '+') i = 1;
-	if (i == s.size()) return false;
+    if (s.empty()) return false;
+    if (s[0] == '-' || s[0] == '+') i = 1;
+    if (i == s.size()) return false;
 
-	for (; i < s.size(); ++i) {
-		if (s[i] == '.') {
-			if (pointSeen) return false;
-			pointSeen = true;
-		}
-		else if (!std::isdigit(s[i])) {
-			return false;
-		}
-	}
-	return pointSeen;
+    for (; i < s.size(); ++i) {
+        if (s[i] == '.') {
+            if (pointSeen) return false;
+            pointSeen = true;
+        }
+        else if (!std::isdigit(static_cast<unsigned char>(s[i]))) {
+            return false;
+        }
+    }
+    return pointSeen;
 }
 ```
 
@@ -59,5 +66,22 @@ bool isDecimal(const std::string& s) {
 std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より slow
 \n お勧め
  std::cout << name << '\n';シングルクォート
+```
+
+### Math
+
+```c++
+#include <cmath>
+
+//sqrt
+double number = 4.0;
+std::sqrt(number)//2
+    
+//pow
+std::pow(number, 2);//16.0
+
+//abs //fabs
+
+
 ```
 
