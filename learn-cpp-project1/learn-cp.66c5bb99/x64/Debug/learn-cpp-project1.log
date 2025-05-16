@@ -1,3 +1,2 @@
 ﻿  main.cpp
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(64,15): warning C4505: 'get_new_year_weekday': 内部リンケージ含む参照されていない関数が削除されました
   learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe
