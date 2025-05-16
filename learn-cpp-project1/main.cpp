@@ -18,16 +18,23 @@ double c = 0.0;
 
 int main() {
 	
-	
-	int h[5] = { 10, 11, 12, 13, 14 };
+	auto vals = { 10, 5, 20, 15 };
+	int max_val = *std::max_element(vals.begin(), vals.end());
+	int min_val = *std::min_element(vals.begin(), vals.end());
 
-	int* p = &h[0];
-	cout << *p << '\n';
-	p--;
+
+	
+	cout << max_val << '\n' << min_val<< '\n';
+	
+	//int h[5] = { 10, 11, 12, 13, 14 };
+
+	//int* p = &h[0];
+	//cout << *p << '\n';
+	//p--;
 
 	//p[4] = 200;
 	
-	cout << *p << '\n';
+	//cout << *p << '\n';
 
 	/*string kamoku[5] = {
 		"算数",

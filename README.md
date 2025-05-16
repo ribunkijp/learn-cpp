@@ -168,3 +168,22 @@ p[4] = 400;//h[4] = 400;
 
 ```
 
+### max min
+
+```c++
+#include <algorithm> 
+
+int a = 10;
+int b = 20;
+
+int maximum = std::max(a, b);  // 20
+int minimum = std::min(a, b);  // 10
+
+#include <initializer_list>//イニシャライザリスト(初期化リスト)
+
+auto vals = {10, 5, 20, 15};
+int max_val = *std::max_element(vals.begin(), vals.end());
+int min_val = *std::min_element(vals.begin(), vals.end());
+
+```
+
