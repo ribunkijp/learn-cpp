@@ -15,46 +15,12 @@ int d = 0;
 double c = 0.0;
 
 
-
 int main() {
 	
-	auto vals = { 10, 5, 20, 15 };
-	int max_val = *std::max_element(vals.begin(), vals.end());
-	int min_val = *std::min_element(vals.begin(), vals.end());
-
+	
 
 	
-	cout << max_val << '\n' << min_val<< '\n';
 	
-	//int h[5] = { 10, 11, 12, 13, 14 };
-
-	//int* p = &h[0];
-	//cout << *p << '\n';
-	//p--;
-
-	//p[4] = 200;
-	
-	//cout << *p << '\n';
-
-	/*string kamoku[5] = {
-		"算数",
-		"国語",
-		"英語",
-		"社会",
-		"理科"
-
-	};
-	int total = 0;
-
-	for (int i = 0; i < 5; i++) {
-		cout << kamoku[i] << "の成績を入力してください\n";
-		int input = 0;
-		cin >> input;
-		total += input;
-	}
-	
-	cout << total / 5 << '\n';*/
-
 
 
 	std::cin.ignore();
