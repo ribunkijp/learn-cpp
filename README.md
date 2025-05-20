@@ -45,8 +45,47 @@ std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より 
 ### 関数
 
 ```c++
+//
 ネストされた関数 nested function is not legal
 プレースホルダー placeholder 仮の値
+//
+status codes:
+    		0: success
+    		
+            #include <cstdlib>	
+            EXIT_SUCESS: 	success  
+            EXIT_FAILURE:	failure	 
+//
+仮引数　parameter
+実引数　argument
+//
+unnamed parameter:
+void doSomething(int) // ok: unnamed parameter will not generate warning
+{
+}
+unreferenced parameters:
+void doSomething(int count) // warning: unreferenced parameter count
+{
+    // This function used to do something with count but it is not used any longer
+}
+//
+temporary objects
+int getValueFromUser()
+{
+ 	std::cout << "Enter an integer: ";
+	int input{};
+	std::cin >> input;
+
+	return input; // return the value of input back to the caller
+}
+
+int main()
+{
+	std::cout << getValueFromUser() << '\n'; // where does the returned value get stored?
+
+	return 0;
+}
+//
 
 ```
 
