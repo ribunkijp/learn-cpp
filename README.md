@@ -34,7 +34,7 @@ int a {1}, b{2};
 演算子 オペレーター operator
 ```
 
-###　iostream
+### iostream
 
 ```c++
 std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より slow
