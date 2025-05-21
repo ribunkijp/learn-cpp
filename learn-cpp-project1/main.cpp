@@ -9,20 +9,25 @@
 #include <cstdlib> 
 #include <array>
 
-using namespace std;
+#define PRINT_RIBUNKI
 
-int d = 0;
-double c = 0.0;
-
-
-int main() {
+int main() 
+{
 	
 	
+#ifndef PRINT_RIBUNKI
+	std::cout << "RIBUNKI" << '\n';
+#endif
+#ifndef PRING_OBITO
+	std::cout << "OBITO" << '\n';
+#endif
 
 	
 	
-
-
+	
+	
+	
+	
 	std::cin.ignore();
 	std::cin.get();
 
