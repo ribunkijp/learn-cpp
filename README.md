@@ -31,6 +31,7 @@ int a {1}, b{2};
 式　エクスプレッション　expression 
 文　ステートメント　statement
 宣言　デクラレーション　declaration
+定義 デフィニション　definition
 演算子 オペレーター operator
 ```
 
@@ -48,6 +49,7 @@ std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より 
 //
 ネストされた関数 nested function is not legal
 プレースホルダー placeholder 仮の値
+
 //
 status codes:
     		0: success
@@ -55,9 +57,11 @@ status codes:
             #include <cstdlib>	
             EXIT_SUCESS: 	success  
             EXIT_FAILURE:	failure	 
+
 //
 仮引数　parameter
 実引数　argument
+
 //
 unnamed parameter:
 void doSomething(int) // ok: unnamed parameter will not generate warning
@@ -68,23 +72,100 @@ void doSomething(int count) // warning: unreferenced parameter count
 {
     // This function used to do something with count but it is not used any longer
 }
-//
-temporary objects
-int getValueFromUser()
-{
- 	std::cout << "Enter an integer: ";
-	int input{};
-	std::cin >> input;
 
-	return input; // return the value of input back to the caller
+//
+temporary object テンポラリーオブジェクト 一時的なオブジェクト
+
+//
+リファクタリング refactoring コードの整理／内部構造の改善
+//
+
+```
+
+### ネーミングコリジョン / ネームスペースズ    naming collision / naming conflict
+
+```c++
+//
+リンカーが実行する　linker executes
+//
+スコープ リージョン　scope region
+//
+```
+
+### プリプロセッサ preprocessor
+
+```c++
+//
+directive ディレクティブ　指令
+
+//
+marco マクロ
+    
+//substitution text  サブテキスト(サブスティテューションテキスト) 置換テキスト  ！！！お勧めしない
+#define MY_NAME "ribunki"
+
+int main() {
+    
+	std::cout << MY_NAME << '\n';
 }
+
+//Conditional compilation コンディショナルコンパイルレーション 条件付きコンパイル
+////ifdef
+#define PRINT_RIBUNKI
+
+int main() 
+{
+#ifdef PRINT_RIBUNKI //==#if defined(PRINT_RIBUNKI)
+	std::cout << "RIBUNKI" << '\n';
+#endif
+#ifdef PRING_OBITO  //==#if defined(PRINT_OBITO)
+	std::cout << "OBITO" << '\n';
+#endif
+}
+////ifndef
+#define PRINT_RIBUNKI
+
+int main() 
+{	
+#ifndef PRINT_RIBUNKI //==#if !defined(PRINT_RIBUNKI)
+	std::cout << "RIBUNKI" << '\n';
+#endif
+#ifndef PRING_OBITO  //== #if !defined(PRINT_OBITO)
+	std::cout << "OBITO" << '\n';
+#endif
+}
+//#if0  #if1
+////
+#if 0  //Don't compile anything starting here
+	std::cout << "RIBUNKI" << '\n';
+#endif //until this point
+////
+#if 1 //the following code will be compiled
+	std::cout << "RIBUNKI" << '\n';
+#endif
+
+//
+#define RP 0
+int main()
+{
+#ifdef RP
+	std::cout << RP << '\n';//0
+#endif
+}
+
+// 
+////ribunki.h
+#define RIBUNKI 55
+////main.cpp
+#include "ribunki.h"
 
 int main()
 {
-	std::cout << getValueFromUser() << '\n'; // where does the returned value get stored?
-
-	return 0;
+#ifdef RIBUNKI
+    std::cout << RIBUNKI << '\n';//55
+#endif
 }
+
 //
 
 ```
@@ -195,20 +276,75 @@ const array<string, 7> weekdays  = { "日曜日","月曜日", "火曜日", "水�
 return バイト数
 ```
 
-### ポインター && 配列
+### 配列 array
 
 ```c++
-int h[5] = {10, 11, 12, 13, 14};
+//
+添字　インデックス　index
+
+//配列とポインター
+int h[5]{10, 11, 12, 13, 14};
 int* p = &h[0];//ポインターpはhの先頭要素ｎ
 h = &h[0];//C/C++では、配列名は暗黙(あんもく)的に先頭の要素へのポインタに変換されます。
 *(h + n) == h[n];
-*(p + n) == p[n]; // p[n]は*(p + n)のシンタックスシュガー(Syntax sugar);
+*(p + n) == p[n]; // p[n]は*(p + n)のシンタックスシュガー(Syntax sugar);!!!
 *p == h[0];//10
 p++;
 *p == h[1];//11
 
 p[4] = 400;//h[4] = 400;
+//アルゴリズム　algorithm 算法
 
+//安定ソート
+
+//ソートsort 昇順・降順
+///ソート昇順
+void sort_array_ascending(int* arr, int size) 
+{
+	for (int i=0; i < size-1; i++)
+	{
+		int temp = arr[0];
+		for (int j = 0; j < size-i-1; j++)
+		{
+			if (arr[j] > arr[j+1]) {
+				temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+		}
+
+	}
+}
+
+int datas[]{ 0,1,20,33,4, 2,4,6,7,8,22,3423,23,4,2,1,0 };
+size_t size = sizeof(datas) / sizeof(datas[0]);
+sort_array_descending(datas, size);
+////ソート降順
+void sort_array_descending()
+
+//reverse リバース 反転
+void sort_array_reverse()
+    
+//多次元配列
+////
+int data[2][3] = {
+    {0, 1, 2},
+    {3, 4, 5}
+}
+////
+in data[2][3][5] {
+    {
+        {0, 1, 2, 3, 4},
+    	{5, 6, 7, 8, 9},
+        {10, 11, 12, 13, 14}
+    },
+    {
+        
+    	{0, 1, 2, 3, 4},
+    	{5, 6, 7, 8, 9},
+        {10, 11, 12, 13, 14}
+    } 
+};
 ```
 
 ### max min
