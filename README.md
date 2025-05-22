@@ -287,23 +287,6 @@ int main() {
 //
 ```
 
-### 文字列
-
-```c++
-//初期化
-char str[4]{ 'A', 'B', 'C', '\0'};
-const char str[4] = "ABC";
-
-//ポインターで扱う
-const char* str = "hello";
-std::cout << *str << '\n';//h
-std::cout << str << '\n';//hello --> std::cout は const char* を受け取ると、そのポインタが指す ヌル終端文字列を文字列として表示します。
-str++;
-std::cout << *str << '\n';//e
-std::cout << str << '\n';//ello
-
-```
-
 ### string
 
 ```c++
@@ -327,6 +310,15 @@ std::stoll
 
 //str.size()
 
+//str.find(sub, start_pos)
+std::string str = "hello 234a24";
+std::size_t pos = str.find('2', 0);
+std::cout << pos << '\n';//6
+
+//str.replace(pos, len, new_string)
+std::string str = "hello 234a24";
+str.replace(3, 5, "ggggg");
+std::cout << str << '\n';//helggggg4a24
 ```
 
 ### isInteger
@@ -411,3 +403,23 @@ std::pow(number, 2);//16.0
 
 ```
 
+### 文字列
+
+```c++
+//初期化
+char str[4]{ 'A', 'B', 'C', '\0'};
+const char str[4] = "ABC";
+
+//ポインターで扱う
+const char* str = "hello";
+std::cout << *str << '\n';//h
+std::cout << str << '\n';//hello --> std::cout は const char* を受け取ると、そのポインタが指す ヌル終端文字列を文字列として表示します。
+std::cout << str[1] << '\n';//e
+str++;
+std::cout << *str << '\n';//e
+std::cout << str << '\n';//ello
+std::cout << str[1] << '\n';//l
+#include <cstring>
+std::size_t len = strlen(str);//len=5;hello /nを除いて
+
+```

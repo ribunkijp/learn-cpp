@@ -8,6 +8,7 @@
 #include <time.h>
 #include <cstdlib> 
 #include <array>
+#include <cstring>
 #include "ribunki.h"
 #include "sort_array_ascending.h"
 
@@ -17,12 +18,12 @@ int main()
 {
 	
 	
-	const char* str = "hello";
+	std::string str = "hello 234a24";
+	
 
-	str++;
+	str.replace(3, 5, "ggggg");
 
 	std::cout << str << '\n';
-	std::cout << *str << '\n';
 
 
 	return 0;
