@@ -62,12 +62,11 @@ status codes:
 仮引数　parameter
 実引数　argument
 
-//
-unnamed parameter:
+//unnamed parameter:
 void doSomething(int) // ok: unnamed parameter will not generate warning
 {
 }
-unreferenced parameters:
+//unreferenced parameters:
 void doSomething(int count) // warning: unreferenced parameter count
 {
     // This function used to do something with count but it is not used any longer
@@ -319,7 +318,16 @@ std::cout << pos << '\n';//6
 std::string str = "hello 234a24";
 str.replace(3, 5, "ggggg");
 std::cout << str << '\n';//helggggg4a24
+
+//str.empty();
 ```
+
+### vectory ベクター
+
+```c++
+```
+
+
 
 ### isInteger
 
