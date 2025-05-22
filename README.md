@@ -170,112 +170,6 @@ int main()
 
 ```
 
-
-
-
-
-### size_t
-
-```c++
-符号なし整数型（unsigned int や unsigned long に近い）で、メモリのサイズや配列のインデックスなどの非負の数値を表すために使用されます
-```
-
-### string to 整数
-
-```c++
-#include <string>
-
-std::string s = "123";
-int n = std::stoi(s);  // 文字列を整数に変換
-```
-
-### isInteger
-
-```c++
-#include <string>   // std::string
-#include <cctype>   // std::isdigit
-
-static bool isInteger(const std::string& s) {
-	if (s.empty()) return false;
-
-	size_t i = 0;
-	if (s[0] == '-' || s[0] == '+') i = 1;
-	if (i == s.size()) return false;
-
-	for (; i < s.size(); ++i) {
-		if (!std::isdigit(static_cast<unsigned char>(s[i]))) return false;
-	}
-	return true;
-}
-```
-
-### isDecimal
-
-```c++
-#include <string>   // std::string
-#include <cctype>   // std::isdigit
-
-bool isDecimal(const std::string& s) {
-    size_t i = 0;
-    bool pointSeen = false;
-
-    if (s.empty()) return false;
-    if (s[0] == '-' || s[0] == '+') i = 1;
-    if (i == s.size()) return false;
-
-    for (; i < s.size(); ++i) {
-        if (s[i] == '.') {
-            if (pointSeen) return false;
-            pointSeen = true;
-        }
-        else if (!std::isdigit(static_cast<unsigned char>(s[i]))) {
-            return false;
-        }
-    }
-    return pointSeen;
-}
-```
-
-### Math
-
-```c++
-#include <cmath>
-
-//sqrt
-double number = 4.0;
-std::sqrt(number)//2
-    
-//pow
-std::pow(number, 2);//16.0
-
-//abs //fabs
-
-
-```
-
-### array
-
-```c++
-#include <array>
-
-const array<string, 7> weekdays  = { "日曜日","月曜日", "火曜日", "水曜日", "木曜日", "金曜日", "土曜日" };
-```
-
-## ポインター vs 参照
-
-```c++
-動的メモリを管理するとき。newやdeleteでメモリを動的に確保・解放するときはポインターが必須。
-ヌルを許容したいとき。ポインターは「何も指していない状態(null)を表せるので、存在しない可能性がある対象を扱う場合に便利。
-ポインター変数は指す対象をあとから変えられるので、柔軟に使いたい場合。参照は一度決めたら変えられないので、意図が明確になる。
-言語や低レベルなコードとの互換性が必要なとき、C言語は参照を持たないので、Cとの連携や古いコードの利用にポインターを使う。
-```
-
-### sizeof()
-
-```c++
-return バイト数
-```
-
 ### 配列 array
 
 ```c++
@@ -285,6 +179,9 @@ return バイト数
 //配列とポインター
 int h[5]{10, 11, 12, 13, 14};
 int* p = &h[0];//ポインターpはhの先頭要素ｎ
+std::cout << p << '\n';//0000004883CFFA38
+std::cout << *p << '\n';//10
+std::cout << h << '\n'//0000004883CFFA38
 h = &h[0];//C/C++では、配列名は暗黙(あんもく)的に先頭の要素へのポインタに変換されます。
 *(h + n) == h[n];
 *(p + n) == p[n]; // p[n]は*(p + n)のシンタックスシュガー(Syntax sugar);!!!
@@ -297,7 +194,7 @@ p[4] = 400;//h[4] = 400;
 
 //安定ソート
 
-//ソートsort 昇順・降順
+//バブルソートsort 昇順・降順
 ///ソート昇順
 void sort_array_ascending(int* arr, int size) 
 {
@@ -345,11 +242,147 @@ in data[2][3][5] {
         {10, 11, 12, 13, 14}
     } 
 };
+
+//
+#include <iostream>
+#include <vector>     // std::vector を使う場合
+#include <array>      // std::array を使う場合
+#include <algorithm>  // std::sort を使うため
+
+int main() {
+    //--- Cスタイル配列の場合 ---
+    int arr[] = {5, 2, 8, 1, 9, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    std::sort(arr, arr + n); // 配列の先頭と末尾の次を指すポインタを指定
+
+    std::cout << "ソート後のCスタイル配列: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    //--- std::vector の場合 ---
+    std::vector<int> vec = {7, 3, 0, 6, 2};
+    std::sort(vec.begin(), vec.end()); // begin() と end() イテレータを指定
+
+    std::cout << "ソート後のstd::vector: ";
+    for (int x : vec) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+
+    //--- std::array の場合 ---
+    std::array<int, 5> arr_std = {4, 1, 7, 3, 5};
+    std::sort(arr_std.begin(), arr_std.end()); // begin() と end() イテレータを指定
+
+    std::cout << "ソート後のstd::array: ";
+    for (int x : arr_std) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+//
 ```
 
-### max min
+### 文字列
 
 ```c++
+//初期化
+char str[4]{ 'A', 'B', 'C', '\0'};
+const char str[4] = "ABC";
+
+//ポインターで扱う
+const char* str = "hello";
+std::cout << *str << '\n';//h
+std::cout << str << '\n';//hello --> std::cout は const char* を受け取ると、そのポインタが指す ヌル終端文字列を文字列として表示します。
+str++;
+std::cout << *str << '\n';//e
+std::cout << str << '\n';//ello
+
+```
+
+### string
+
+```c++
+#include <string>
+
+//str to int   std::stoi(str, &pos, base)
+str：変換したい文字列。
+pos（省略可能）：変換後に、最初に変換されなかった文字の位置を格納するための size_t 型のポインタ。
+base（省略可能）：変換に使用する基数（デフォルトは10進数で、2〜36の値を指定可能）。
+std::string str = "123abc";
+std::size_t pos;
+int num = std::stoi(str, &pos);//pos 3
+std::cout << num << '\n';//123
+
+//str to long
+std::stol
+// str to long long 
+std::stoll
+
+//str.substr(pos, len)
+
+//str.size()
+
+```
+
+### isInteger
+
+```c++
+#include <string>   // std::string
+#include <cctype>   // std::isdigit
+
+static bool isInteger(const std::string& s) {
+	if (s.empty()) return false;
+
+	size_t i = 0;
+	if (s[0] == '-' || s[0] == '+') i = 1;
+	if (i == s.size()) return false;
+
+	for (; i < s.size(); ++i) {
+		if (!std::isdigit(static_cast<unsigned char>(s[i]))) return false;
+	}
+	return true;
+}
+
+//size_t
+符号なし整数型（unsigned int や unsigned long に近い）で、メモリのサイズや配列のインデックスなどの非負の数値を表すために使用されます
+```
+
+### isDecimal
+
+```c++
+#include <string>   // std::string
+#include <cctype>   // std::isdigit
+
+bool isDecimal(const std::string& s) {
+    size_t i = 0;
+    bool pointSeen = false;
+
+    if (s.empty()) return false;
+    if (s[0] == '-' || s[0] == '+') i = 1;
+    if (i == s.size()) return false;
+
+    for (; i < s.size(); ++i) {
+        if (s[i] == '.') {
+            if (pointSeen) return false;
+            pointSeen = true;
+        }
+        else if (!std::isdigit(static_cast<unsigned char>(s[i]))) {
+            return false;
+        }
+    }
+    return pointSeen;
+}
+```
+
+### Math
+
+```c++
+//max min
 #include <algorithm> 
 
 int a = 10;
@@ -363,6 +396,18 @@ int minimum = std::min(a, b);  // 10
 auto vals = {10, 5, 20, 15};
 int max_val = *std::max_element(vals.begin(), vals.end());
 int min_val = *std::min_element(vals.begin(), vals.end());
+
+//
+#include <cmath>
+
+////sqrt
+double number = 4.0;
+std::sqrt(number)//2
+    
+////pow
+std::pow(number, 2);//16.0
+
+////abs //fabs
 
 ```
 
