@@ -1,2 +1,13 @@
 ﻿  main.cpp
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(14,70): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(14,47): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(24,48): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(24,51): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(37,18): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(37,21): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(43,22): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(43,26): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(43,1): warning C5045: /Qspectre スイッチが 
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(43,1): warning C5045: C:\code\learn-cpp\learn-cpp-project1\main.cpp(36) : 注: この行で比較を行ってインデックス 'num' の範囲を確認します
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(43,1): warning C5045: C:\code\learn-cpp\learn-cpp-project1\main.cpp(43) : 注: この行に呼び出しを入力します に指定されている場合、コンパイラはメモリの読み込みに Spectre の軽減策を挿入します
   learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe

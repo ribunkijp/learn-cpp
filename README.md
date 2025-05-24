@@ -154,7 +154,12 @@ int main()
 
 // 
 ////ribunki.h
+#ifndef RIBUNKI_H//// header guards
+#define RIBUNKI_H//// header guards
+
 #define RIBUNKI 55
+
+#endif
 ////main.cpp
 #include "ribunki.h"
 
@@ -169,122 +174,60 @@ int main()
 
 ```
 
-### 配列 array
+### header files ヘッダーファイル
 
 ```c++
-//
-添字　インデックス　index
-
-//配列とポインター
-int h[5]{10, 11, 12, 13, 14};
-int* p = &h[0];//ポインターpはhの先頭要素ｎ
-std::cout << p << '\n';//0000004883CFFA38
-std::cout << *p << '\n';//10
-std::cout << h << '\n'//0000004883CFFA38
-h = &h[0];//C/C++では、配列名は暗黙(あんもく)的に先頭の要素へのポインタに変換されます。
-*(h + n) == h[n];
-*(p + n) == p[n]; // p[n]は*(p + n)のシンタックスシュガー(Syntax sugar);!!!
-*p == h[0];//10
-p++;
-*p == h[1];//11
-
-p[4] = 400;//h[4] = 400;
-//アルゴリズム　algorithm 算法
-
-//安定ソート
-
-//バブルソートsort 昇順・降順
-///ソート昇順
-void sort_array_ascending(int* arr, int size) 
-{
-	for (int i=0; i < size-1; i++)
-	{
-		int temp = arr[0];
-		for (int j = 0; j < size-i-1; j++)
-		{
-			if (arr[j] > arr[j+1]) {
-				temp = arr[j];
-				arr[j] = arr[j+1];
-				arr[j+1] = temp;
-			}
-		}
-
-	}
+//ヘッダーガード header guards
+//標準定義
+////add.h
+#ifndef ADD_H
+#define ADD_H
+int add(int a, int b);
+#endif
+////add.cpp
+#include <add.h>
+int add(int a, int b) {
+    return a + b;
 }
+////main.cpp
+#include <add.h>
+add(1, 2);
 
-int datas[]{ 0,1,20,33,4, 2,4,6,7,8,22,3423,23,4,2,1,0 };
-size_t size = sizeof(datas) / sizeof(datas[0]);
-sort_array_descending(datas, size);
-////ソート降順
-void sort_array_descending()
-
-//reverse リバース 反転
-void sort_array_reverse()
-    
-//多次元配列
-////
-int data[2][3] = {
-    {0, 1, 2},
-    {3, 4, 5}
+//#pragma once
+////add.h
+#pragma once
+int add(int a, int b);
+////add.cpp
+#include <add.h>
+int add(int a, int b) {
+    return a + b;
 }
-////
-in data[2][3][5] {
-    {
-        {0, 1, 2, 3, 4},
-    	{5, 6, 7, 8, 9},
-        {10, 11, 12, 13, 14}
-    },
-    {
-        
-    	{0, 1, 2, 3, 4},
-    	{5, 6, 7, 8, 9},
-        {10, 11, 12, 13, 14}
-    } 
-};
-
-//
-#include <iostream>
-#include <vector>     // std::vector を使う場合
-#include <array>      // std::array を使う場合
-#include <algorithm>  // std::sort を使うため
-
-int main() {
-    //--- Cスタイル配列の場合 ---
-    int arr[] = {5, 2, 8, 1, 9, 4};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    std::sort(arr, arr + n); // 配列の先頭と末尾の次を指すポインタを指定
-
-    std::cout << "ソート後のCスタイル配列: ";
-    for (int i = 0; i < n; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
-
-    //--- std::vector の場合 ---
-    std::vector<int> vec = {7, 3, 0, 6, 2};
-    std::sort(vec.begin(), vec.end()); // begin() と end() イテレータを指定
-
-    std::cout << "ソート後のstd::vector: ";
-    for (int x : vec) {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
-
-    //--- std::array の場合 ---
-    std::array<int, 5> arr_std = {4, 1, 7, 3, 5};
-    std::sort(arr_std.begin(), arr_std.end()); // begin() と end() イテレータを指定
-
-    std::cout << "ソート後のstd::array: ";
-    for (int x : arr_std) {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
-}
-
-//
+////main.cpp
+#include <add.h>
+add(1, 2);
 ```
+
+### constexpr コンステクスプル
+
+```c++
+//constexpr
+The value of the initializer must be known at compile-tim
+定数式（constant expression）で使用できる
+初期化子の値は コンパイル時に判明している必要があります
+constexpr オブジェクトは、コンパイル時または実行時 に評価されることができます。   
+//const
+オブジェクトの初期化後にその値を変更できない
+初期化子の値は、コンパイル時または実行時に判明している可能性があります
+const オブジェクトは 実行時に評価される ことができます
+    
+
+    
+//constexpr 関数
+お勧め: ツール関数, 汎用アルゴリズム, パフォーマンスに敏感な処理 //コンパイル時
+だめ: 入出力(I/O), システムコール, 動的メモリ確保　//実行時
+```
+
+
 
 ### string
 
@@ -410,6 +353,145 @@ std::pow(number, 2);//16.0
 ////abs //fabs
 
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+==================================================================================================================================================================================================================
+
+### 配列
+
+```c++
+//
+添字　インデックス　index
+
+//配列とポインター
+int h[5]{10, 11, 12, 13, 14};
+int* p = &h[0];//ポインターpはhの先頭要素ｎ
+std::cout << p << '\n';//0000004883CFFA38
+std::cout << *p << '\n';//10
+std::cout << h << '\n'//0000004883CFFA38
+h = &h[0];//C/C++では、配列名は暗黙(あんもく)的に先頭の要素へのポインタに変換されます。
+*(h + n) == h[n];
+*(p + n) == p[n]; // p[n]は*(p + n)のシンタックスシュガー(Syntax sugar);!!!
+*p == h[0];//10
+p++;
+*p == h[1];//11
+
+p[4] = 400;//h[4] = 400;
+//アルゴリズム　algorithm 算法
+
+//安定ソート
+
+//バブルソートsort 昇順・降順
+///ソート昇順
+void sort_array_ascending(int* arr, int size) 
+{
+	for (int i=0; i < size-1; i++)
+	{
+		int temp = arr[0];
+		for (int j = 0; j < size-i-1; j++)
+		{
+			if (arr[j] > arr[j+1]) {
+				temp = arr[j];
+				arr[j] = arr[j+1];
+				arr[j+1] = temp;
+			}
+		}
+
+	}
+}
+
+int datas[]{ 0,1,20,33,4, 2,4,6,7,8,22,3423,23,4,2,1,0 };
+size_t size = sizeof(datas) / sizeof(datas[0]);
+sort_array_descending(datas, size);
+////ソート降順
+void sort_array_descending()
+
+//reverse リバース 反転
+void sort_array_reverse()
+    
+//多次元配列
+////
+int data[2][3] = {
+    {0, 1, 2},
+    {3, 4, 5}
+}
+////
+in data[2][3][5] {
+    {
+        {0, 1, 2, 3, 4},
+    	{5, 6, 7, 8, 9},
+        {10, 11, 12, 13, 14}
+    },
+    {
+        
+    	{0, 1, 2, 3, 4},
+    	{5, 6, 7, 8, 9},
+        {10, 11, 12, 13, 14}
+    } 
+};
+
+//
+#include <iostream>
+#include <vector>     // std::vector を使う場合
+#include <array>      // std::array を使う場合
+#include <algorithm>  // std::sort を使うため
+
+int main() {
+    //--- Cスタイル配列の場合 ---
+    int arr[] = {5, 2, 8, 1, 9, 4};
+    int n = sizeof(arr) / sizeof(arr[0]);
+    std::sort(arr, arr + n); // 配列の先頭と末尾の次を指すポインタを指定
+
+    std::cout << "ソート後のCスタイル配列: ";
+    for (int i = 0; i < n; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << std::endl;
+
+    //--- std::vector の場合 ---
+    std::vector<int> vec = {7, 3, 0, 6, 2};
+    std::sort(vec.begin(), vec.end()); // begin() と end() イテレータを指定
+
+    std::cout << "ソート後のstd::vector: ";
+    for (int x : vec) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+
+    //--- std::array の場合 ---
+    std::array<int, 5> arr_std = {4, 1, 7, 3, 5};
+    std::sort(arr_std.begin(), arr_std.end()); // begin() と end() イテレータを指定
+
+    std::cout << "ソート後のstd::array: ";
+    for (int x : arr_std) {
+        std::cout << x << " ";
+    }
+    std::cout << std::endl;
+
+    return 0;
+}
+
+//
+```
+
+
 
 ### 文字列
 
