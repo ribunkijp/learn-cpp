@@ -1,27 +1,39 @@
 ﻿
 #include <iostream>
-#include <string>
-#include <stdlib.h>
 #include <vector>
-#include <algorithm>
 #include <iomanip>
+#include <conio.h>
 
-std::vector<std::vector<int>> create_mahoujin(int rows, int cols, std::vector<std::vector<int>>& mahoujin_datas);
+void create_mahoujin(size_t rows, size_t cols, std::vector<std::vector<size_t>>& mahoujin_datas);
 
 int main() 
 {
-	int rows{ 3 }, cols = { 3 };
-	std::vector<std::vector<int>> mahoujin_datas(rows, std::vector<int>(cols, 0));
+	size_t rows{ 5 }, cols = { 5 };
 	
-	create_mahoujin(3, 3, mahoujin_datas);
-
 	std::cout << rows << "x" << cols << "奇数魔法陣\n";
+
 	
-	for (int i = 0; i < rows; i++) {
+	std::vector<std::vector<size_t>> mahoujin_datas(rows, std::vector<size_t>(cols, 0));
 
-		for (int j = 0; j < cols; j++) {
+	
+	create_mahoujin(rows, cols, mahoujin_datas);
 
-			std::cout << std::setw(3) << mahoujin_datas[i][j] << ' ';
+	std::cout << '+';
+	for (size_t k = 0; k < rows + 1; k++) {
+		std::cout << "----+";
+	}
+	std::cout << '\n';
+	
+	for (size_t i = 0; i < rows; i++) {
+
+		for (size_t j = 0; j < cols; j++) {
+			(void)_getch();
+			std::cout << std::left << std::setw(static_cast<int>(3)) << mahoujin_datas[i][j] << " | ";
+		}
+		std::cout << '\n';
+		std::cout << '+';
+		for (size_t k = 0; k < rows + 1; k++) {
+			std::cout << "----+";
 		}
 		std::cout << '\n';
 	}
@@ -29,20 +41,21 @@ int main()
 	return 0;
 }
 
-std::vector<std::vector<int>> create_mahoujin(int rows, int cols, std::vector<std::vector<int>> &mahoujin_datas) {
+void create_mahoujin(size_t rows, size_t cols, std::vector<std::vector<size_t>> &mahoujin_datas) {
 
-	int num { 1 };
-	int i{ 0 }, j{ rows / 2 };
+	size_t num { 1 };
+	size_t i{ 0 }, j{ cols / 2 };
 	while (num <= rows * cols){
 		mahoujin_datas[i][j] = num;
 
-		int mi = (i - 1 + rows) % rows;
-		int mj = (j + 1) % cols;
+		size_t mi = (i - 1 + rows) % rows;
+		size_t mj = (j + 1) % cols;
 
 
 		if (mahoujin_datas[mi][mj] != 0) {
 			i = (i + 1) % rows;
 		}
+
 		else {
 			i = mi;
 			j = mj;
@@ -51,5 +64,4 @@ std::vector<std::vector<int>> create_mahoujin(int rows, int cols, std::vector<st
 		num++;
 	}
 
-	return mahoujin_datas;
 }

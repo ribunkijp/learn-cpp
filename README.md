@@ -41,6 +41,11 @@ int a {1}, b{2};
 std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より slow
 \n お勧め
  std::cout << name << '\n';シングルクォート
+     
+#include <iomanip>//setw()
+#include <conio.h>//_getch()
+(void)_getch();//キーを押すごとに
+std::cout << std::left << std::setw(static_cast<int>(rows)) << mahoujin_datas[i][j] << ' ';
 ```
 
 ### 関数
@@ -265,9 +270,11 @@ std::cout << str << '\n';//helggggg4a24
 //str.empty();
 ```
 
-### vectory ベクター
+### vector ベクター
 
 ```c++
+//vectorのインデックスはsize_t型
+
 ```
 
 
