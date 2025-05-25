@@ -274,7 +274,7 @@ std::cout << str << '\n';//helggggg4a24
 
 ```c++
 //vectorのインデックスはsize_t型
-
+    
 ```
 
 
