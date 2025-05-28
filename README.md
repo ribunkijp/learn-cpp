@@ -640,6 +640,7 @@ std::cout << str << '\n';//ello
 std::cout << str[1] << '\n';//l
 
 ////
+#define _CRT_SECURE_NO_WARNINGS
 #include <cstring>
 int main() 
 {
@@ -671,18 +672,17 @@ int main()
 	
 	val--;
 	std::cout << strlen(val) << '\n';//5 null文字(/0)を除く長さを返す　戻り値の型はsize_t
-	////strcpy_s
-    strcpy_s(str1, sizeof(str1), str);//str1コピー先　strコピー元
-    std::cout << str1 << '\n';//abcde
-	////strcat_s 戻り値はerrno_t型
-    errno_t concat_err = strcat_s(str1, sizeof(str1), str2);//str2をstr1の末尾に追加
-    if (concat_err == 0) {
-        std::cout << str1 << '\n';
-    }
-    else {
-        std::cout << "Error concatenating strings.\n";
-        std::cout << str1 << '\n';//abcdef
-    }
+	////strncpy
+    strncpy(str1, str, sizeof(str1) - 1);//\0を除く
+    str1[sizeof(str1) - 1] = '\0';//安全策
+    std::cout << str1 << '\n';
+	////strncat(str1, str2, str2から追加する最大文字数(\0数えない))
+    strncat(str1, str2, sizeof(str2) - 1);//\0を除く
+    std::cout << str1 << '\n';
+   	////strncmp(str1, str, 比較文字数)
+    int hikaku_result = strncmp(str1, str, 10);
+	std::cout << hikaku_result << '\n';
+    
 	std::cin.seekg(0);
 	std::cin.get();
 	return 0;

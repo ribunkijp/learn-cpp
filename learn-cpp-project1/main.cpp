@@ -1,10 +1,12 @@
 ﻿
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
 #include <iomanip>
 #include <conio.h>
 #include <string>
 #include <cstring>
+
 
 int main()
 {
@@ -38,20 +40,15 @@ int main()
 	val--;
 	std::cout << strlen(val) << '\n';//5 null文字(/0)を除く長さを返す　戻り値の型はsize_t
 
-	strcpy_s(str1, sizeof(str1), str);
+	strncpy(str1, str, sizeof(str1) - 1);
+	str1[sizeof(str1) - 1] = '\0';
 	std::cout << str1 << '\n';
 
+	strncat(str1, str2, 2);
+	std::cout << str1 << '\n';
 
-	errno_t concat_err = strcat_s(str1, sizeof(str1), str2);
-	if (concat_err == 0) {
-		std::cout << str1 << '\n';
-	}
-	else {
-		std::cout << "Error concatenating strings.\n";
-	}
-
-	/*int hikaku_result{ 0 };
-	errno_t hikaku_err = strcmp_s(str1, 10, str, &hikaku_result);*/
+	int hikaku_result = strncmp(str1, str, 10);
+	std::cout << hikaku_result << '\n';
 
 	std::cin.seekg(0);
 	std::cin.get();
