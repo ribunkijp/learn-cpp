@@ -215,6 +215,8 @@ add(1, 2);
 ### constexpr コンステクスプル
 
 ```c++
+constant expression
+
 //constexpr
 The value of the initializer must be known at compile-tim
 定数式（constant expression）で使用できる
@@ -230,6 +232,100 @@ const オブジェクトは 実行時に評価される ことができます
 //constexpr 関数
 お勧め: ツール関数, 汎用アルゴリズム, パフォーマンスに敏感な処理 //コンパイル時
 だめ: 入出力(I/O), システムコール, 動的メモリ確保　//実行時
+```
+
+### 構造体　ストラクト struct     ストラクチャー structure
+
+```c++
+//ポインター
+struct Employee {
+	int id {};
+	int age {};
+	double wage{};
+};
+
+int main() 
+{
+	Employee ri{33, 33, 300.33};
+	Employee bun{ 11, 11, 11111.11 };
+
+	ri = bun;//代入
+    
+	Employee* ob = &ri;
+
+	std::cout << (*ob).age << '\n';//11
+
+	std::cin.seekg(0);
+	std::cin.get();
+	return 0;
+}
+//参照
+struct Employee {
+	int id {};
+	int age {};
+	double wage{};
+};
+
+void show(Employee &a);
+int main() 
+{
+	Employee ri{33, 33, 300.33};
+	Employee bun{ 11, 11, 11111.11 };
+
+	ri = bun;
+
+	Employee* ob = &ri;
+
+	show(ri);
+
+	std::cout << (*ob).age << '\n';
+
+	std::cin.seekg(0);
+	std::cin.get();
+	return 0;
+}
+void show(Employee &a) {
+	a.age = 888;
+}
+```
+
+### enum 列挙
+
+```c++
+enum Color {
+	red,//0
+	yellow,//1
+	blue,//2
+	green,//3
+	pink,//4
+	black = 10,//default = 5;　10を代入して　＝10 
+	white//default = 6; black = 10; white = 11;
+};
+
+Color kutsu{ black };
+Color shatsu{ white };
+
+std::cout << kutsu << '\n';//10
+std::cout << shatsu << '\n';//11
+
+switch (kutsu) {
+	case black:
+		std::cout << "黒い靴" << '\n';//
+		break;
+	case white:
+		std::cout << "白い靴" << '\n';
+		break;
+	default:
+		std::cout << "グレーの靴" << '\n';
+		break;
+}
+```
+
+### typedef
+
+```c++
+typedef unsigned long int Seisuu_long;
+Seisuu_long num = 1;//unsigned long int num = 1;
 ```
 
 
@@ -252,6 +348,9 @@ std::cout << num << '\n';//123
 std::stol
 // str to long long 
 std::stoll
+    
+//int double to string
+std::string s = std::to_string(n);
 
 //str.substr(pos, len)
 
@@ -268,6 +367,9 @@ str.replace(3, 5, "ggggg");
 std::cout << str << '\n';//helggggg4a24
 
 //str.empty();
+
+//str.insert(pos, count, char);
+
 ```
 
 ### vector ベクター
@@ -505,7 +607,7 @@ int main() {
 ```c++
 //初期化
 char str[4]{ 'A', 'B', 'C', '\0'};
-const char str[4] = "ABC";
+const char str[4] = "ABC";//ABCnull
 
 //ポインターで扱う
 const char* str = "hello";

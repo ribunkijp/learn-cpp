@@ -3,65 +3,43 @@
 #include <vector>
 #include <iomanip>
 #include <conio.h>
+#include <string>
 
-void create_mahoujin(size_t rows, size_t cols, std::vector<std::vector<size_t>>& mahoujin_datas);
-
+enum Color {
+	red,
+	yellow,
+	blue,
+	green,
+	pink,
+	black = 10,
+	white
+};
 int main() 
 {
-	size_t rows{ 5 }, cols = { 5 };
+	Color kutsu{ black };
+	Color shatsu{ white };
 	
-	std::cout << rows << "x" << cols << "奇数魔法陣\n";
-
+	std::cout << kutsu << '\n';
+	std::cout << shatsu << '\n';
 	
-	std::vector<std::vector<size_t>> mahoujin_datas(rows, std::vector<size_t>(cols, 0));
-
-	
-	create_mahoujin(rows, cols, mahoujin_datas);
-
-	std::cout << '+';
-	for (size_t k = 0; k < rows + 1; k++) {
-		std::cout << "----+";
-	}
-	std::cout << '\n';
-	
-	for (size_t i = 0; i < rows; i++) {
-
-		for (size_t j = 0; j < cols; j++) {
-			(void)_getch();
-			std::cout << std::left << std::setw(static_cast<int>(3)) << mahoujin_datas[i][j] << " | ";
-		}
-		std::cout << '\n';
-		std::cout << '+';
-		for (size_t k = 0; k < rows + 1; k++) {
-			std::cout << "----+";
-		}
-		std::cout << '\n';
+	switch (kutsu) {
+		case black:
+			std::cout << "黒い靴" << '\n';
+			break;
+		case white:
+			std::cout << "白い靴" << '\n';
+			break;
+		default:
+			std::cout << "グレーの靴" << '\n';
+			break;
 	}
 	
+	
+
+
+	std::cin.seekg(0);
+	std::cin.get();
 	return 0;
 }
 
-void create_mahoujin(size_t rows, size_t cols, std::vector<std::vector<size_t>> &mahoujin_datas) {
 
-	size_t num { 1 };
-	size_t i{ 0 }, j{ cols / 2 };
-	while (num <= rows * cols){
-		mahoujin_datas[i][j] = num;
-
-		size_t mi = (i - 1 + rows) % rows;
-		size_t mj = (j + 1) % cols;
-
-
-		if (mahoujin_datas[mi][mj] != 0) {
-			i = (i + 1) % rows;
-		}
-
-		else {
-			i = mi;
-			j = mj;
-		}
-
-		num++;
-	}
-
-}
