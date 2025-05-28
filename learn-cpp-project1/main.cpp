@@ -6,41 +6,52 @@
 #include <string>
 #include <cstring>
 
-//ポインター
-struct Shumi {
-	std::string sakka{};
-	std::string yakyuu{};
-};
-struct Employee {
-	int id{};
-	int age{};
-	double wage{};
-	Shumi shu{};
-};
-
-int main() 
+int main()
 {
-	Employee ri{33, 33, 300.33};
-	Employee bun{ 11, 11, 11111.11 };
 
-	ri = bun;//代入
-    
-	Employee* ob = &ri;
+	char str[6]{
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'\0'
+	};
 
-	std::cout << (*ob).age << '\n';//11
-    ////アロー　arrow -> 
-    std::cout << ob -> wage << '\n';//1111.1
-    
-    ////
-   Employee pers[]{
-        {11, 111, 1111.1, {"サッカー1", "野球1"}},
-        {22, 222, 2222.2, {"サッカー2", "野球2"}},
-        {33, 333, 3333.3, {"サッカー3", "野球3"}},
-        {44, 444, 4444.4, {"サッカー4", "野球4"}},
-        {55, 555, 5555.5, {"サッカー5", "野球5"}}
-    };
-	std::cout << pers[3].id << '\n';//44
-    std::cout << pers[2].shu.yakyuu << '\n';//野球3
+	char str1[10];
+
+	char str2[3]{
+		'f',
+		'g',
+		'\0'
+	};
+	
+	const char* val = &str[0];
+	std::cout << val << '\n';//abcde
+	std::cout << val[0] << '\n';//a
+
+	val++;
+	std::cout << *val << '\n';//b
+	std::cout << val << '\n';//bcde
+	std::cout << val[0] << '\n';//b
+
+	val--;
+	std::cout << strlen(val) << '\n';//5 null文字(/0)を除く長さを返す　戻り値の型はsize_t
+
+	strcpy_s(str1, sizeof(str1), str);
+	std::cout << str1 << '\n';
+
+
+	errno_t concat_err = strcat_s(str1, sizeof(str1), str2);
+	if (concat_err == 0) {
+		std::cout << str1 << '\n';
+	}
+	else {
+		std::cout << "Error concatenating strings.\n";
+	}
+
+	/*int hikaku_result{ 0 };
+	errno_t hikaku_err = strcmp_s(str1, 10, str, &hikaku_result);*/
 
 	std::cin.seekg(0);
 	std::cin.get();

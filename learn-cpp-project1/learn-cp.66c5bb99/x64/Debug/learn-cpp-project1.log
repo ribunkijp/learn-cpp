@@ -1,2 +1,2 @@
 ﻿  main.cpp
-  learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(10,1): error C1075: '{': 一致するトークンが見つかりませんでした
