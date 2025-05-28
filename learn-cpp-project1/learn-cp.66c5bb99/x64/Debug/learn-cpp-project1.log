@@ -1,22 +1,2 @@
 ﻿  main.cpp
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(34,2): warning C4061: 列挙型 'Color' の switch 中の列挙子 'red' は case ラベルによって明示的にハンドルされません。
-      C:\code\learn-cpp\learn-cpp-project1\main.cpp(8,6):
-      'Color' の宣言を確認してください
-  
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(34,2): warning C4061: 列挙型 'Color' の switch 中の列挙子 'yellow' は case ラベルによって明示的にハンドルされません。
-      C:\code\learn-cpp\learn-cpp-project1\main.cpp(8,6):
-      'Color' の宣言を確認してください
-  
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(34,2): warning C4061: 列挙型 'Color' の switch 中の列挙子 'blue' は case ラベルによって明示的にハンドルされません。
-      C:\code\learn-cpp\learn-cpp-project1\main.cpp(8,6):
-      'Color' の宣言を確認してください
-  
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(34,2): warning C4061: 列挙型 'Color' の switch 中の列挙子 'green' は case ラベルによって明示的にハンドルされません。
-      C:\code\learn-cpp\learn-cpp-project1\main.cpp(8,6):
-      'Color' の宣言を確認してください
-  
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(34,2): warning C4061: 列挙型 'Color' の switch 中の列挙子 'pink' は case ラベルによって明示的にハンドルされません。
-      C:\code\learn-cpp\learn-cpp-project1\main.cpp(8,6):
-      'Color' の宣言を確認してください
-  
   learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe

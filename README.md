@@ -238,10 +238,15 @@ const オブジェクトは 実行時に評価される ことができます
 
 ```c++
 //ポインター
+struct Shumi {
+	std::string sakka{};
+	std::string yakyuu{};
+};
 struct Employee {
-	int id {};
-	int age {};
+	int id{};
+	int age{};
 	double wage{};
+	Shumi shu{};
 };
 
 int main() 
@@ -254,6 +259,19 @@ int main()
 	Employee* ob = &ri;
 
 	std::cout << (*ob).age << '\n';//11
+    ////アロー　arrow -> 
+    std::cout << ob -> wage << '\n';//1111.1
+    
+    ////
+   Employee pers[]{
+        {11, 111, 1111.1, {"サッカー1", "野球1"}},
+        {22, 222, 2222.2, {"サッカー2", "野球2"}},
+        {33, 333, 3333.3, {"サッカー3", "野球3"}},
+        {44, 444, 4444.4, {"サッカー4", "野球4"}},
+        {55, 555, 5555.5, {"サッカー5", "野球5"}}
+    };
+	std::cout << pers[3].id << '\n';//44
+    std::cout << pers[2].shu.yakyuu << '\n';//野球3
 
 	std::cin.seekg(0);
 	std::cin.get();
@@ -327,6 +345,8 @@ switch (kutsu) {
 typedef unsigned long int Seisuu_long;
 Seisuu_long num = 1;//unsigned long int num = 1;
 ```
+
+### 
 
 
 
@@ -619,6 +639,34 @@ std::cout << *str << '\n';//e
 std::cout << str << '\n';//ello
 std::cout << str[1] << '\n';//l
 #include <cstring>
-std::size_t len = strlen(str);//len=5;hello /nを除いて
+int main() 
+{
+	
+	char str[6]{
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'\0'
+	};
+
+	const char* val = &str[0];
+	std::cout << val << '\n';//abcde
+	std::cout << val[0] << '\n';//0
+	
+	val++;
+	std::cout << *val << '\n';//b
+	std::cout << val << '\n';//bcde
+	std::cout << val[0] << '\n';
+	
+	val--;
+	std::cout << strlen(val) << '\n';//5 null文字(/0)を除く長さを返す　戻り値の型はsize_t
+
+
+	std::cin.seekg(0);
+	std::cin.get();
+	return 0;
+}
 
 ```
