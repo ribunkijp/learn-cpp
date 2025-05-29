@@ -1,7 +1,3 @@
-[文字列](文字列.md)
-
-[プリプロセッサ　preprocessor](プリプロセッサ.md)
-
 ### コンフィギュレーション　configuration
 
 ```c++
@@ -100,6 +96,88 @@ temporary object テンポラリーオブジェクト 一時的なオブジェ�
 //
 ```
 
+### プリプロセッサ　preprocessor
+
+```c++
+//
+directive ディレクティブ　指令
+
+//
+marco マクロ
+    
+//substitution text  サブテキスト(サブスティテューションテキスト) 置換テキスト  ！！！お勧めしない
+#define MY_NAME "ribunki"
+
+int main() {
+    
+	std::cout << MY_NAME << '\n';
+}
+
+//Conditional compilation コンディショナルコンパイルレーション 条件付きコンパイル
+////ifdef
+#define PRINT_RIBUNKI
+
+int main() 
+{
+#ifdef PRINT_RIBUNKI //==#if defined(PRINT_RIBUNKI)
+	std::cout << "RIBUNKI" << '\n';
+#endif
+#ifdef PRING_OBITO  //==#if defined(PRINT_OBITO)
+	std::cout << "OBITO" << '\n';
+#endif
+}
+////ifndef
+#define PRINT_RIBUNKI
+
+int main() 
+{	
+#ifndef PRINT_RIBUNKI //==#if !defined(PRINT_RIBUNKI)
+	std::cout << "RIBUNKI" << '\n';
+#endif
+#ifndef PRING_OBITO  //== #if !defined(PRINT_OBITO)
+	std::cout << "OBITO" << '\n';
+#endif
+}
+//#if0  #if1
+////
+#if 0  //Don't compile anything starting here
+	std::cout << "RIBUNKI" << '\n';
+#endif //until this point
+////
+#if 1 //the following code will be compiled
+	std::cout << "RIBUNKI" << '\n';
+#endif
+
+//
+#define RP 0
+int main()
+{
+#ifdef RP
+	std::cout << RP << '\n';//0
+#endif
+}
+
+// 
+////ribunki.h
+#ifndef RIBUNKI_H//// header guards
+#define RIBUNKI_H//// header guards
+
+#define RIBUNKI 55
+
+#endif
+////main.cpp
+#include "ribunki.h"
+
+int main()
+{
+#ifdef RIBUNKI
+    std::cout << RIBUNKI << '\n';//55
+#endif
+}
+
+//
+```
+
 
 
 ### header files ヘッダーファイル
@@ -121,6 +199,7 @@ int add(int a, int b) {
 #include <add.h>
 add(1, 2);
 
+
 //#pragma once
 ////add.h
 #pragma once
@@ -134,6 +213,8 @@ int add(int a, int b) {
 #include <add.h>
 add(1, 2);
 ```
+
+
 
 ### constexpr コンステクスプル
 
@@ -408,24 +489,6 @@ std::pow(number, 2);//16.0
 
 
 
-
-
-#### 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### 配列
 
 ```c++
@@ -499,47 +562,72 @@ in data[2][3][5] {
     } 
 };
 
-//
-#include <iostream>
-#include <vector>     // std::vector を使う場合
-#include <array>      // std::array を使う場合
-#include <algorithm>  // std::sort を使うため
+```
 
-int main() {
-    //--- Cスタイル配列の場合 ---
-    int arr[] = {5, 2, 8, 1, 9, 4};
-    int n = sizeof(arr) / sizeof(arr[0]);
-    std::sort(arr, arr + n); // 配列の先頭と末尾の次を指すポインタを指定
+### 文字列
 
-    std::cout << "ソート後のCスタイル配列: ";
-    for (int i = 0; i < n; ++i) {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
+```c++
+//初期化
+char str[4]{ 'A', 'B', 'C', '\0'};
+const char str[4] = "ABC";//ABCnull
 
-    //--- std::vector の場合 ---
-    std::vector<int> vec = {7, 3, 0, 6, 2};
-    std::sort(vec.begin(), vec.end()); // begin() と end() イテレータを指定
+//ポインターで扱う
+const char* str = "hello";
+std::cout << *str << '\n';//h
+std::cout << str << '\n';//hello --> std::cout は const char* を受け取ると、そのポインタが指す ヌル終端文字列を文字列として表示します。
+std::cout << str[1] << '\n';//e
+str++;
+std::cout << *str << '\n';//e
+std::cout << str << '\n';//ello
+std::cout << str[1] << '\n';//l
 
-    std::cout << "ソート後のstd::vector: ";
-    for (int x : vec) {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
+////
+#define _CRT_SECURE_NO_WARNINGS
+#include <cstring>
+int main() 
+{
+	
+	char str[6]{
+		'a',
+		'b',
+		'c',
+		'd',
+		'e',
+		'\0'
+	};
+    char str1[10];
 
-    //--- std::array の場合 ---
-    std::array<int, 5> arr_std = {4, 1, 7, 3, 5};
-    std::sort(arr_std.begin(), arr_std.end()); // begin() と end() イテレータを指定
+    char str2[3]{
+        'f',
+        'g',
+        '\0'
+    };
 
-    std::cout << "ソート後のstd::array: ";
-    for (int x : arr_std) {
-        std::cout << x << " ";
-    }
-    std::cout << std::endl;
-
-    return 0;
+	const char* val = &str[0];
+	std::cout << val << '\n';//abcde
+	std::cout << val[0] << '\n';//a
+	
+	val++;
+	std::cout << *val << '\n';//b
+	std::cout << val << '\n';//bcde
+	std::cout << val[0] << '\n';//b
+	
+	val--;
+	std::cout << strlen(val) << '\n';//5 null文字(/0)を除く長さを返す　戻り値の型はsize_t
+	////strncpy
+    strncpy(str1, str, sizeof(str1) - 1);//\0を除く
+    str1[sizeof(str1) - 1] = '\0';//安全策
+    std::cout << str1 << '\n';
+	////strncat(str1, str2, str2から追加する最大文字数(\0数えない))
+    strncat(str1, str2, sizeof(str2) - 1);//\0を除く
+    std::cout << str1 << '\n';
+   	////strncmp(str1, str, 比較文字数)
+    int hikaku_result = strncmp(str1, str, 10);
+	std::cout << hikaku_result << '\n';
+    
+	std::cin.seekg(0);
+	std::cin.get();
+	return 0;
 }
-
-//
 ```
 
