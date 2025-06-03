@@ -422,6 +422,12 @@ std::cout << Random::get<std::size_t>(1, 6u) << '\n';
 ### file I/0
 
 ```c++
+//getline
+#include <string>
+
+std::string strBuf{};
+std::getline(std::cin, strBuf);
+std::cout << strBuf << '\n';
 ```
 
 
@@ -467,6 +473,8 @@ std::cout << str << '\n';//helggggg4a24
 //str.empty();
 
 //str.insert(pos, count, char);
+
+
 
 ```
 
