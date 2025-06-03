@@ -350,7 +350,81 @@ typedef unsigned long int Seisuu_long;
 Seisuu_long num = 1;//unsigned long int num = 1;
 ```
 
-### 
+### 乱数
+
+```c++
+#include <random>
+#include <chrono>
+
+////time
+std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()) };
+////device
+std::mt19937 mt{ std::random_device{}() };
+
+std::uniform_int_distribution die8{ 1, 8 };
+
+std::cout << die8(mt) << '\n';
+
+////Random.h
+#ifndef RANDOM_H
+#define RANDOM_H
+
+#include <chrono>
+#include <random>
+
+namespace Random
+{
+	
+	inline std::mt19937 generate()
+	{
+		std::random_device rd{};
+
+		std::seed_seq ss{
+			static_cast<std::seed_seq::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()),
+				rd(), rd(), rd(), rd(), rd(), rd(), rd() };
+
+		return std::mt19937{ ss };
+	}
+
+	
+	inline std::mt19937 mt{ generate() };
+
+	
+	inline int get(int min, int max)
+	{
+		return std::uniform_int_distribution{ min, max }(mt);
+	}
+
+	
+	template <typename T>
+	T get(T min, T max)
+	{
+		return std::uniform_int_distribution<T>{min, max}(mt);
+	}
+
+	
+	template <typename R, typename S, typename T>
+	R get(S min, T max)
+	{
+		return get<R>(static_cast<R>(min), static_cast<R>(max));
+	}
+}
+
+#endif
+
+#include "Random.h"
+#include <cstddef> // for std::size_t
+#include <iostream>
+std::cout << Random::get<std::size_t>(1, 6u) << '\n';
+
+```
+
+### file I/0
+
+```c++
+```
+
+
 
 
 

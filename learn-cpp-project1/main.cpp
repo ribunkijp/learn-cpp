@@ -9,24 +9,28 @@
 																		
 ==========================================================================================================*/
 
-#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <vector>
-#include <iomanip>
-#include <conio.h>
 #include <string>
-#include <cstring>
-#include "add.h"
+#include <vector>
+
+struct Per {
+	std::string name{};
+	unsigned age{};
+	unsigned attack_power{};
+	unsigned hp{};
+	unsigned mp{};
+};
 
 
 int main()
 {
 
-
 	
 
-	std::cin.seekg(0);
-	std::cin.get();
-	return 0;
+	
+	
+
+
+	
 }
 

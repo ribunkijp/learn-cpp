@@ -1,4 +1,2 @@
-﻿  add.cpp
-C:\code\learn-cpp\learn-cpp-project1\add.cpp(5,17): error C2065: 'f': 定義されていない識別子です。
-  main.cpp
-  コードを生成中...
+﻿  main.cpp
+  learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe
