@@ -3,7 +3,7 @@
 	main.cpp
 
 																			Author：ribunki
-																			Date  ：2025/6/4
+																			Date  ：2025/6/5
 
 ----------------------------------------------------------------------------------------------------
 
@@ -31,13 +31,91 @@ std::ostream& operator<<(std::ostream& os, const Per& p) {
 		<< "MP: " << p.mp;
 	return os;
 }
+
+static bool read_from_stream(std::vector<Per>& pers);
+
+static bool write_to_stream(Per& per);
+
+Per get_property(std::string& str);
+
+unsigned create_per(std::vector<Per>& pers, std::string& str);
+
+int main()
+{
+	std::vector<Per> pers{};
+	
+
+	std::string input_str_1{};
+	std::string input_str_2{};
+
+	unsigned power1{};
+	unsigned power2{};
+	
+	std::cout << "一つ目のネームを入力してください" << '\n';
+	while (true) {
+		std::getline(std::cin, input_str_1);
+		if (!input_str_1.empty()) {
+
+			read_from_stream(pers);
+			power1 = create_per(pers, input_str_1);
+			break;
+		}
+		else {
+			std::cout << "入力してください" << '\n';
+		}
+	}
+	std::cout << "二つ目のネームを入力してください" << '\n';
+	while (true) {
+		std::getline(std::cin, input_str_2);
+		if (!input_str_2.empty()) {
+
+			if (input_str_1 == input_str_2) {
+				std::cout << "一つ目のネームと違うネームを入力してください" << '\n';
+			}
+			else {
+
+				power2 = create_per(pers, input_str_2);
+				break;
+			}
+		}
+		else {
+			std::cout << "入力してください" << '\n';
+		}
+	}
+	
+	//バトル レギュレーション: attack_power * hp * mp
+	std::cout << "バイトの結果は：" << '\n';
+	if (power1 > power2) {
+		std::cout << input_str_1 << "勝つ" << '\n';
+	}
+	else if (power1 < power2) {
+		std::cout << input_str_2 << "勝つ" << '\n';
+	}
+	else {
+		std::cout << input_str_1 << "引き分ける" << '\n';
+	}
+
+	
+
+
+	return 0;
+
+}
+
+
+
 static bool read_from_stream(std::vector<Per>& pers) {
 
 	std::ifstream in_file("pers_data.bin", std::ios::in | std::ios::binary);
-	if (!in_file.is_open()) {
-		std::cerr << "Error opening file for binary reading!" << std::endl;
-		return 1;
+	if (!in_file.is_open()) return false;
+
+	// empty?
+	in_file.seekg(0, std::ios::end);
+	if (in_file.tellg() == 0) {
+		in_file.close();
+		return false;
 	}
+	in_file.seekg(0, std::ios::beg);
 
 	while (true) {
 		Per per;
@@ -78,13 +156,9 @@ static bool read_from_stream(std::vector<Per>& pers) {
 
 	return true;
 }
-
-static bool write_to_stream(Per per) {
+static bool write_to_stream(Per& per) {
 	std::ofstream out_file("pers_data.bin", std::ios::out | std::ios::binary | std::ios::app);//std::ios::app追加append
-	if (!out_file.is_open()) {
-		std::cerr << "Error opening file for binary writing!" << std::endl;
-		return false;
-	}
+	if (!out_file.is_open()) return false;
 
 	//name
 	int len = per.name.length();
@@ -102,7 +176,7 @@ static bool write_to_stream(Per per) {
 
 Per get_property(std::string& str) {
 	Per p;
-	std::mt19937 mt{ static_cast<std::mt19937::result_type>(str.size()) };
+	std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()) };
 
 	std::uniform_int_distribution die8{ 100, 800 };
 
@@ -115,29 +189,31 @@ Per get_property(std::string& str) {
 
 }
 
-int main()
-{
-	std::vector<Per> pers{};
+unsigned create_per(std::vector<Per>& pers, std::string& str) {
+	unsigned power;
 
-
-	std::string input_str{};
-	std::getline(std::cin, input_str);
-
-
-	Per new_per = get_property(input_str);
-
-	write_to_stream(new_per);
-
-	read_from_stream(pers);
-
+	bool found_name = false;
 	for (const auto& p : pers) {
-		std::cout << p << "\n------------------------------\n";
+		if (str == p.name) {
+
+			found_name = true;
+			std::cout << "\n------------------------------\n" << p << "\n------------------------------\n";
+
+			power = p.attack_power * p.hp * p.mp;
+
+			break;
+
+		}
+	}
+	//データにないなら、create
+	if (!found_name) {
+		Per new_per = get_property(str);
+		power = new_per.attack_power * new_per.hp * new_per.mp;
+
+		write_to_stream(new_per);
+
+		std::cout << "\n------------------------------\n" << new_per << "\n------------------------------\n";
 	}
 
-
-
-
-
-	return 0;
-
+	return power;
 }
