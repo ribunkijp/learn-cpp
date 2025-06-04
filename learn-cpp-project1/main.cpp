@@ -26,7 +26,7 @@ struct Per {
 };
 std::ostream& operator<<(std::ostream& os, const Per& p) {
 	os << "Name: " << p.name << "\n"
-		<< "Attack Power: " << p.attack_power << "\n"
+		<< "Attack_Power: " << p.attack_power << "\n"
 		<< "HP: " << p.hp << "\n"
 		<< "MP: " << p.mp;
 	return os;
@@ -44,41 +44,32 @@ static bool read_from_stream(std::vector<Per> &pers) {
 		//name
 		int len;
 		in_file.read(reinterpret_cast<char*>(&len), sizeof(len));
+		//
 		if (in_file.eof()) break;
-		if (!in_file) { 
-			std::cerr << "Debug: Failed to read name_len or EOF." << std::endl;
-			return false;
-		}
+		
+		if (!in_file) return false;
+
 		if (len > 0) {
 			per.name.resize(len);
 		
 			in_file.read(&per.name[0], len);
-			if (!in_file) { 
-			
-				return false;
-			}
+			if (!in_file) return false;
 		}
 		else {
 			per.name.clear();
 		}
+		
 		//attack_power
 		in_file.read(reinterpret_cast<char*>(&per.attack_power), sizeof(per.attack_power));
-		if (!in_file) { 
-			std::cerr << "Debug: Failed to read attack_power or EOF." << std::endl;
-			return false;
-		}
+		if (!in_file) return false;
+		
 		//hp
 		in_file.read(reinterpret_cast<char*>(&per.hp), sizeof(per.hp));
-		if (!in_file) {
-			std::cerr << "Debug: Failed to read hp or EOF." << std::endl;
-			return false;
-		}
+		if (!in_file) return false;
+		
 		//mp
 		in_file.read(reinterpret_cast<char*>(&per.mp), sizeof(per.mp));
-		if (!in_file) {
-			std::cerr << "Debug: Failed to read mp or EOF." << std::endl;
-			return false;
-		}
+		if (!in_file) return false;
 
 		pers.push_back(per);
 	}
