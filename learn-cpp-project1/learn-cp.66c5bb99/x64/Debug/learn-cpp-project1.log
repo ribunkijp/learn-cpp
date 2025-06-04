@@ -1,6 +1,6 @@
 ﻿  main.cpp
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(22,15): warning C4820: 'Per': '4' バイトのパディングを データ メンバー 'Per::mp' の後に追加しました。
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(37,10): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(37,10): warning C4365: '初期化中': 'unsigned __int64' から 'int' に変換しました。signed/unsigned が一致しません。
-C:\code\learn-cpp\learn-cpp-project1\main.cpp(25,13): warning C4505: 'read_from_stream': 内部リンケージ含む参照されていない関数が削除されました
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(24,15): warning C4820: 'Per': '4' バイトのパディングを データ メンバー 'Per::mp' の後に追加しました。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(53,20): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(99,10): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\code\learn-cpp\learn-cpp-project1\main.cpp(99,10): warning C4365: '初期化中': 'unsigned __int64' から 'int' に変換しました。signed/unsigned が一致しません。
   learn-cpp-project1.vcxproj -> C:\code\learn-cpp\learn-cpp-project1\x64\Debug\learn-cpp-project1.exe
