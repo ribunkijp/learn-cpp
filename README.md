@@ -474,7 +474,8 @@ std::cout << str << '\n';//helggggg4a24
 
 //str.insert(pos, count, char);
 
-
+//c_str()
+str.c_str()
 
 ```
 
