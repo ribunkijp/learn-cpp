@@ -17,7 +17,7 @@
 #include <chrono>
 
 
-
+// Per
 struct Per {
 	unsigned int attack_power{};
 	unsigned int hp{};
@@ -32,25 +32,37 @@ std::ostream& operator<<(std::ostream& os, const Per& p) {
 	return os;
 }
 
+//stream から　read
 static bool read_from_stream(std::vector<Per>& pers);
 
+// write to stream
 static bool write_to_stream(Per& per);
 
+
+// property生成
 Per get_property(std::string& str);
 
+
+// ネームからper生成
 unsigned create_per(std::vector<Per>& pers, std::string& str);
 
+
+
+// main
 int main()
 {
+	// per datas
 	std::vector<Per> pers{};
 	
-
+	// 入力ネーム
 	std::string input_str_1{};
 	std::string input_str_2{};
 
+	// 戦力
 	unsigned power1{};
 	unsigned power2{};
 	
+	// 一つ目のネーム入力処理
 	std::cout << "一つ目のネームを入力してください" << '\n';
 	while (true) {
 		std::getline(std::cin, input_str_1);
@@ -64,6 +76,7 @@ int main()
 			std::cout << "入力してください" << '\n';
 		}
 	}
+	// 二つ目のネーム入力処理
 	std::cout << "二つ目のネームを入力してください" << '\n';
 	while (true) {
 		std::getline(std::cin, input_str_2);
@@ -103,7 +116,7 @@ int main()
 }
 
 
-
+//stream から　read
 static bool read_from_stream(std::vector<Per>& pers) {
 
 	std::ifstream in_file("pers_data.bin", std::ios::in | std::ios::binary);
@@ -156,6 +169,8 @@ static bool read_from_stream(std::vector<Per>& pers) {
 
 	return true;
 }
+
+// write to stream
 static bool write_to_stream(Per& per) {
 	std::ofstream out_file("pers_data.bin", std::ios::out | std::ios::binary | std::ios::app);//std::ios::app追加append
 	if (!out_file.is_open()) return false;
@@ -174,6 +189,7 @@ static bool write_to_stream(Per& per) {
 	return true;
 }
 
+// property生成
 Per get_property(std::string& str) {
 	Per p;
 	std::mt19937 mt{ static_cast<std::mt19937::result_type>(std::chrono::steady_clock::now().time_since_epoch().count()) };
@@ -189,6 +205,7 @@ Per get_property(std::string& str) {
 
 }
 
+// ネームからper生成
 unsigned create_per(std::vector<Per>& pers, std::string& str) {
 	unsigned power;
 

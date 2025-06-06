@@ -1,7 +1,7 @@
 ﻿  main.cpp
 C:\code\learn_cpp\learn_cpp_1\main.cpp(24,15): warning C4820: 'Per': '4' バイトのパディングを データ メンバー 'Per::mp' の後に追加しました。
-C:\code\learn_cpp\learn_cpp_1\main.cpp(131,20): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
-C:\code\learn_cpp\learn_cpp_1\main.cpp(164,10): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
-C:\code\learn_cpp\learn_cpp_1\main.cpp(164,10): warning C4365: '初期化中': 'unsigned __int64' から 'int' に変換しました。signed/unsigned が一致しません。
-C:\code\learn_cpp\learn_cpp_1\main.cpp(218,1): warning C4701: 初期化されていない可能性のあるローカル変数 'power' が使用されます
+C:\code\learn_cpp\learn_cpp_1\main.cpp(144,20): warning C4365: '引数': 'int' から 'const unsigned __int64' に変換しました。signed/unsigned が一致しません。
+C:\code\learn_cpp\learn_cpp_1\main.cpp(179,10): warning C4267: '初期化中': 'size_t' から 'int' に変換しました。データが失われているかもしれません。
+C:\code\learn_cpp\learn_cpp_1\main.cpp(179,10): warning C4365: '初期化中': 'unsigned __int64' から 'int' に変換しました。signed/unsigned が一致しません。
+C:\code\learn_cpp\learn_cpp_1\main.cpp(235,1): warning C4701: 初期化されていない可能性のあるローカル変数 'power' が使用されます
   learn_cpp_1.vcxproj -> C:\code\learn_cpp\learn_cpp_1\x64\Debug\learn_cpp_1.exe
