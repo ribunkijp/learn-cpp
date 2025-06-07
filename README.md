@@ -46,6 +46,8 @@ std::endl 改行　と　フラッシュバッファー(fluse buffer) \n より 
 #include <conio.h>//_getch()
 (void)_getch();//キーを押すごとに
 std::cout << std::left << std::setw(static_cast<int>(rows)) << mahoujin_datas[i][j] << ' ';
+
+std::cerr バッファリングされない（リアルタイムに出力される）という特徴があります
 ```
 
 ### 関数
@@ -212,6 +214,29 @@ int add(int a, int b) {
 ////main.cpp
 #include <add.h>
 add(1, 2);
+```
+
+### ログファイル logfile
+
+```c++
+#include <iostream>
+#include <fstream>
+
+int main() {
+    std::ofstream error_log("error_log.txt");
+    if (!error_log) {
+        std::cerr << "ログファイルを開けませんでした" << std::endl;
+        return 1;
+    }
+
+    // std::cerr をログファイルにリダイレクト
+    std::cerr.rdbuf(error_log.rdbuf());
+
+    // このエラーはログファイルに出力される
+    std::cerr << "これはエラーメッセージです" << std::endl;
+
+    return 0;
+}
 ```
 
 
