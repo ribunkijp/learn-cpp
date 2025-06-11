@@ -54,7 +54,7 @@ int main()
 {
 	// per datas
 	std::vector<Per> pers{};
-	
+
 	// 入力ネーム
 	std::string input_str_1{};
 	std::string input_str_2{};
@@ -62,7 +62,7 @@ int main()
 	// 戦力
 	unsigned power1{};
 	unsigned power2{};
-	
+
 	// 一つ目のネーム入力処理
 	std::cout << "一つ目のネームを入力してください" << '\n';
 	while (true) {
@@ -96,7 +96,7 @@ int main()
 			std::cout << "入力してください" << '\n';
 		}
 	}
-	
+
 	//バトル レギュレーション: attack_power * hp * mp
 	std::cout << "バイトの結果は：" << '\n';
 	if (power1 > power2) {
@@ -109,7 +109,7 @@ int main()
 		std::cout << input_str_1 << "引き分ける" << '\n';
 	}
 
-	
+
 
 
 	return 0;
@@ -134,7 +134,7 @@ static bool read_from_stream(std::vector<Per>& pers) {
 	while (true) {
 		Per per;
 		//name
-		int len;
+		size_t len;
 		in_file.read(reinterpret_cast<char*>(&len), sizeof(len));
 		//
 		if (in_file.eof()) break;
@@ -144,7 +144,7 @@ static bool read_from_stream(std::vector<Per>& pers) {
 		if (len > 0) {
 			per.name.resize(len);
 
-			in_file.read(&per.name[0], len);
+			in_file.read(&per.name[0], static_cast<std::streamsize>(len));
 			if (!in_file) return false;
 		}
 		else {
@@ -177,9 +177,9 @@ static bool write_to_stream(Per& per) {
 	if (!out_file.is_open()) return false;
 
 	//name
-	int len = per.name.length();
+	size_t len = per.name.length();
 	out_file.write(reinterpret_cast<const char*>(&len), sizeof(len));
-	out_file.write(per.name.c_str(), len);
+	out_file.write(per.name.c_str(), static_cast<std::streamsize>(len));
 	//attack_power hp mp
 	out_file.write(reinterpret_cast<const char*>(&per.attack_power), sizeof(per.attack_power));
 	out_file.write(reinterpret_cast<const char*>(&per.hp), sizeof(per.hp));
@@ -208,7 +208,7 @@ Per get_property(std::string& str) {
 
 // ネームからper生成
 unsigned create_per(std::vector<Per>& pers, std::string& str) {
-	unsigned power;
+	unsigned power { 0 };
 
 	bool found_name = false;
 	for (const auto& p : pers) {

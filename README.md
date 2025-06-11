@@ -237,6 +237,14 @@ int main() {
 
     return 0;
 }
+
+//spdlogおすすめ
+```
+
+### package
+
+```c++
+vcpkg install spdlog
 ```
 
 
