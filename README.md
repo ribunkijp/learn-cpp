@@ -519,6 +519,40 @@ str.c_str()
     
 ```
 
+### .lib  .dll
+
+```c++
+//ビルドして生成の.dll .libをArraySorterLib/x64/Debug
+ArraySorterLib プロパティ->全般->出力ディレクトリ　$(ProjectDir)$(Platform)\$(Configuration)\　
+    
+//
+ArraySorterLib プロパティ->c/c++ ->プリプロセッサ->プリプロセッサの定義->ARRAYSORTLIB_EXPORTS
+
+//
+Myapp  ArraySorterLib プロパティ->全般->出力ディレクトリ　$(ProjectDir)$(Platform)\$(Configuration)\　
+
+//
+MyApp プロパティ->c/c++ ->全般->追加のインクルードディレクトリ　..\ArraySorterLib
+
+//
+MyApp プロパティ->リンカー ->入力->追加の依存ファイル　ArraySorterLib.lib
+    
+//   
+MyApp プロパティ->リンカー ->入力->全般->追加のライブラリディレクトリ　..\ArraySorterLib\x64\Debug
+    
+//    
+MyApp プロパティ->ビルドイベントー ->ビルド後のイベント->コマンドライン　
+    xcopy /Y /D "$(SolutionDir)ArraySorterLib\$(Platform)\$(Configuration)\ArraySorterLib.dll" "$(TargetDir)"
+
+//
+MyAppの上で右クリック->ビルドの依存関係->プロジェクトの依存関係->依存先　ArraySorterLiチェック
+
+    
+
+
+    
+```
+
 
 
 ### isInteger
