@@ -1,3 +1,5 @@
-﻿  main.cpp
+﻿  add.cpp
+  main.cpp
 C:\code\learn_cpp\learn_cpp_1\main.cpp(24,15): warning C4820: 'Per': '4' バイトのパディングを データ メンバー 'Per::mp' の後に追加しました。
+  コードを生成中...
   learn_cpp_1.vcxproj -> C:\code\learn_cpp\learn_cpp_1\x64\Debug\learn_cpp_1.exe
